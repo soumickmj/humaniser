@@ -1,6 +1,6 @@
-# Humanizer
+# Humaniser
 
-A Claude Code skill that removes signs of AI-generated writing from text, making it sound more natural and human.
+A Claude Code skill that removes signs of AI-generated writing from text and rewrites it in traditional British English with the voice and tone of an Oxford or Cambridge professor.
 
 ## Installation
 
@@ -8,7 +8,7 @@ A Claude Code skill that removes signs of AI-generated writing from text, making
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/blader/humanizer.git ~/.claude/skills/humanizer
+git clone https://github.com/blader/humaniser.git ~/.claude/skills/humaniser
 ```
 
 ### Manual install/update (only the skill file)
@@ -16,8 +16,8 @@ git clone https://github.com/blader/humanizer.git ~/.claude/skills/humanizer
 If you already have this repo cloned (or you downloaded `SKILL.md`), copy the skill file into Claude Code’s skills directory:
 
 ```bash
-mkdir -p ~/.claude/skills/humanizer
-cp SKILL.md ~/.claude/skills/humanizer/
+mkdir -p ~/.claude/skills/humaniser
+cp SKILL.md ~/.claude/skills/humaniser/
 ```
 
 ## Usage
@@ -25,28 +25,30 @@ cp SKILL.md ~/.claude/skills/humanizer/
 In Claude Code, invoke the skill:
 
 ```
-/humanizer
+/humaniser
 
 [paste your text here]
 ```
 
-Or ask Claude to humanize text directly:
+Or ask Claude to humanise text directly:
 
 ```
-Please humanize this text: [your text]
+Please humanise this text: [your text]
 ```
 
 ## Overview
 
 Based on [Wikipedia's "Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) guide, maintained by WikiProject AI Cleanup. This comprehensive guide comes from observations of thousands of instances of AI-generated text.
 
+All output is written in traditional British English with the voice of an educated British academic — measured, precise, with dry wit and quiet authority. Think Oxford or Cambridge professor writing for the TLS.
+
 The skill also includes a final "obviously AI generated" audit pass and a second rewrite, to catch lingering AI-isms in the first draft.
 
-### Key Insight from Wikipedia
+### Key insight from Wikipedia
 
 > "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."
 
-## 24 Patterns Detected (with Before/After Examples)
+## 25 Patterns Detected (with Before/After Examples)
 
 ### Content Patterns
 
@@ -85,7 +87,7 @@ The skill also includes a final "obviously AI generated" audit pass and a second
 
 | # | Pattern | Before | After |
 |---|---------|--------|-------|
-| 19 | **Chatbot artifacts** | "I hope this helps! Let me know if..." | Remove entirely |
+| 19 | **Chatbot artefacts** | "I hope this helps! Let me know if..." | Remove entirely |
 | 20 | **Cutoff disclaimers** | "While details are limited in available sources..." | Find sources or remove |
 | 21 | **Sycophantic tone** | "Great question! You're absolutely right!" | Respond directly |
 
@@ -97,7 +99,13 @@ The skill also includes a final "obviously AI generated" audit pass and a second
 | 23 | **Excessive hedging** | "could potentially possibly" | "may" |
 | 24 | **Generic conclusions** | "The future looks bright" | Specific plans or facts |
 
-## Full Example
+### British English Patterns
+
+| # | Pattern | Before | After |
+|---|---------|--------|-------|
+| 25 | **American spellings/vocabulary** | "organization recognized favorable behavior" | "organisation recognised favourable behaviour" |
+
+## Full example
 
 **Before (AI-sounding):**
 > Great question! Here is an essay on this topic. I hope this helps!
@@ -116,22 +124,23 @@ The skill also includes a final "obviously AI generated" audit pass and a second
 >
 > In conclusion, the future looks bright. Exciting times lie ahead as we continue this journey toward excellence. Let me know if you’d like me to expand on any section!
 
-**After (Humanized):**
-> AI coding assistants can speed up the boring parts of the job. They're great at boilerplate: config files and the little glue code you don't want to write. They can also help you sketch a test, but you still have to read it.
+**After (Humanised):**
+> AI coding assistants can make one faster at the tedious parts. Not everything. Certainly not architecture.
 >
-> The dangerous part is how confident the suggestions look. I've accepted code that compiled and passed lint, then discovered later it missed the point because I stopped paying attention.
+> They are rather good at boilerplate: configuration files, test scaffolding, the repetitive glue code one would rather not write. They are equally good at sounding correct whilst being nothing of the sort.
 >
-> If you treat it like autocomplete and review every line, it's useful. If you use it to avoid thinking, it will help you ship bugs faster.
+> I have accepted suggestions that compiled and passed the linter, only to discover later that they had missed the point entirely — because I had stopped paying attention.
 >
-> The only real backstop is tests. Without them, you're mostly judging vibes.
+> If you treat it as autocomplete and review every line, it is useful. If you use it to avoid thinking, it will help you ship bugs faster. The only real backstop is tests. Without them, you are essentially guessing.
 
 ## References
 
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) - Primary source
-- [WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup) - Maintaining organization
+- [WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup) - Maintaining organisation
 
-## Version History
+## Version history
 
+- **2.3.0** - Added traditional British English (Oxford/Cambridge voice) as mandatory output style; added pattern #25 (American spellings/vocabulary); all examples rewritten in British English
 - **2.2.0** - Added a final "obviously AI generated" audit + second-pass rewrite prompts
 - **2.1.1** - Fixed pattern #18 example (curly quotes vs straight quotes)
 - **2.1.0** - Added before/after examples for all 24 patterns
